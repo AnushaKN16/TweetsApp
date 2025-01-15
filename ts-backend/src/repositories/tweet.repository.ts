@@ -6,7 +6,7 @@ export const getTweetRepo = async (
   tweetId: String
 ): Promise<ITweetInterface | null> => {
   try {
-    const tweet = await TweetModel.findOne({ uid: tweetId });
+    const tweet = await TweetModel.findOne({ tweetId: tweetId });
     return tweet;
   } catch (error) {
     console.log(error);
@@ -16,7 +16,9 @@ export const getTweetRepo = async (
 
 export const deleteTweetRepo = async (tweetId: String): Promise<boolean> => {
   try {
-    const tweetDeleted = await TweetModel.findOneAndDelete({ uid: tweetId });
+    const tweetDeleted = await TweetModel.findOneAndDelete({
+      tweetId: tweetId,
+    });
     if (tweetDeleted) {
       return true;
     } else {
@@ -46,7 +48,7 @@ export const updateTweetRepo = async (
 ): Promise<boolean> => {
   try {
     const result = await TweetModel.findOneAndUpdate(
-      { uid: tweetId },
+      { tweetId: tweetId },
       updatedTweet,
       { new: true }
     );
