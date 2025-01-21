@@ -9,7 +9,8 @@ import { IUserInterface } from "../database/interface/user.interface";
 import { error } from "console";
 
 export const getUserController = async (req: Request, res: Response) => {
-  const userId = req.query.userId as string;
+  const userId = req.params.userId as string;
+  console.log(req.params.userId);
 
   try {
     const user = await getUserRepo(userId);
@@ -41,7 +42,7 @@ export const createUserController = async (req: Request, res: Response) => {
 };
 
 export const deleteUserController = async (req: Request, res: Response) => {
-  const userId = req.query.userId as string;
+  const userId = req.params.userId as string;
 
   try {
     const user = await deleteUserRepo(userId);
