@@ -60,3 +60,44 @@ export const updateUserRepo = async (
     return false;
   }
 };
+
+export const updateUserWithTweetIdRepo = async (
+  userId: string,
+  tweetId: string
+): Promise<boolean> => {
+  try {
+    const result = await UserModel.findOneAndUpdate(
+      { uid: userId },
+      { $push: { tweets: tweetId } }
+    );
+    if (result) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+
+export const updateUserWithTweetIdRepoDeletion = async (
+  userId: string,
+  tweetId: string
+): Promise<boolean> => {
+  try {
+    const result = await UserModel.findOneAndUpdate(
+      { uid: userId },
+      { $pull: { tweets: tweetId } }
+    );
+    if (result) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

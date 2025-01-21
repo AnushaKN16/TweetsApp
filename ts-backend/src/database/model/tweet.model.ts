@@ -8,5 +8,5 @@ const tweetSchema = new Schema<ITweetInterface>({
   createdAt: { type: String, required: true },
 });
 
-const TweetModel = mongoose.model<ITweetInterface>("UserModel", tweetSchema);
+const TweetModel = mongoose.model<ITweetInterface>("TweetModel", tweetSchema);
 export default TweetModel;
