@@ -1,5 +1,3 @@
-import 'package:equatable/equatable.dart';
-
 sealed class AuthState {}
 
 final class AuthInitialState extends AuthState {}

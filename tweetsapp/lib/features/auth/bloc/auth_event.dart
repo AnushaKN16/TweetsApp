@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:tweetsapp/features/auth/bloc/auth_bloc.dart';
 
 sealed class AuthEvent {}

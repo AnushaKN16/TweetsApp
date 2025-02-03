@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:tweetsapp/design/app_images.dart';
 import 'package:tweetsapp/design/app_widgets.dart';
 import 'package:tweetsapp/features/auth/bloc/auth_bloc.dart';
 import 'package:tweetsapp/features/auth/bloc/auth_event.dart';
@@ -17,14 +15,13 @@ class AuthRegisterScreen extends StatefulWidget {
 class _AuthRegisterScreenState extends State<AuthRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   AuthBloc authBloc = AuthBloc();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    bool isLogin = true;
-
     return Scaffold(
       appBar: AppBar(
         leading: Container(),
@@ -42,38 +39,36 @@ class _AuthRegisterScreenState extends State<AuthRegisterScreen> {
             Navigator.popUntil(context, (route) => route.isFirst);
           }
         },
-        builder: (content, state) {
+        builder: (contex, state) {
           return Form(
             key: _formKey,
             child: Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  !isLogin
-                      ? TextFormField(
-                          controller: nameController,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Enter your name";
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration:
-                              const InputDecoration(hintText: 'Your Name'),
-                        )
-                      : TextFormField(
-                          controller: emailController,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Enter your Email";
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration:
-                              const InputDecoration(hintText: 'Your Email'),
-                        ),
+                  if (!isLogin)
+                    TextFormField(
+                      controller: nameController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter your name";
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: const InputDecoration(hintText: 'Your Name'),
+                    ),
+                  TextFormField(
+                    controller: emailController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter your Email";
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: const InputDecoration(hintText: 'Your Email'),
+                  ),
                   TextFormField(
                     controller: passwordController,
                     obscureText: true,
@@ -99,7 +94,7 @@ class _AuthRegisterScreenState extends State<AuthRegisterScreen> {
                             email: emailController.text,
                             password: passwordController.text));
                       },
-                      child: Text("Login"),
+                      child: Text(isLogin ? "Login" : "Register"),
                     ),
                   ),
                   Row(
@@ -107,7 +102,17 @@ class _AuthRegisterScreenState extends State<AuthRegisterScreen> {
                       Text(isLogin
                           ? "Don't have an account?"
                           : "Already having an account?"),
-                      Text(!isLogin ? "Login" : "Register"),
+                      InkWell(
+                          onTap: () {
+                            setState(() {
+                              isLogin = !isLogin;
+                            });
+                            print("bool,$isLogin");
+                          },
+                          child: Text(
+                            !isLogin ? "Login" : "Register",
+                            style: TextStyle(color: Colors.deepPurple.shade200),
+                          )),
                     ],
                   ),
                 ],

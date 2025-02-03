@@ -20,7 +20,7 @@ class _RegisterOrLoginState extends State<RegisterOrLogin> {
   }
 
   getUid() async {
-    String uid = await SharedPreferencesManager.getUid();
+    String uid = SharedPreferencesManager.getUid();
 
     if (uid.isEmpty) {
       RegisterOrLogin.authStream.add("");
@@ -35,9 +35,9 @@ class _RegisterOrLoginState extends State<RegisterOrLogin> {
       stream: RegisterOrLogin.authStream.stream,
       builder: (context, snapshot) {
         if (snapshot.data == null || snapshot.data!.isEmpty) {
-          return OnboardingScreen();
+          return const OnboardingScreen();
         } else {
-          return TweetsScreen();
+          return const TweetsScreen();
         }
       },
     );
