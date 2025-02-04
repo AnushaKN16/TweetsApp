@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("PORT", 3000);
-app.set("BASE_URL", "localhost");
+app.set("BASE_URL", "https://tweetsapp-1.onrender.com/api/v1/");
 
 app.use("/api/v1", router);
 

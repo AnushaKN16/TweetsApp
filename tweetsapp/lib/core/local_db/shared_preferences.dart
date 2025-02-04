@@ -1,20 +1,20 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesManager {
-  static late SharedPreferences _prefs;
+  static SharedPreferences? _prefs;
 
   static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  static SharedPreferences get instance => _prefs;
+  static SharedPreferences? get instance => _prefs;
 
   // save token
   static Future<void> saveUid(String uid) async {
-    await _prefs.setString('uid', uid);
+    await _prefs?.setString('uid', uid);
   }
 
   static String getUid() {
-    return _prefs.getString('uid') ?? '';
+    return _prefs?.getString('uid') ?? '';
   }
 }

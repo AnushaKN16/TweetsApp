@@ -1,3 +1,3 @@
 class Config {
-  static const serverUrl = "http://localhost:3000/api/v1/";
+  static const serverUrl = "https://tweetsapp-1.onrender.com/api/v1/";
 }

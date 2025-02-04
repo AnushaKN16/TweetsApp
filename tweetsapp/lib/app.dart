@@ -16,11 +16,12 @@ class RegisterOrLogin extends StatefulWidget {
 class _RegisterOrLoginState extends State<RegisterOrLogin> {
   @override
   void initState() {
+    getUid();
     // TODO: implement initState
   }
 
   getUid() async {
-    String uid = SharedPreferencesManager.getUid();
+    String uid = await SharedPreferencesManager.getUid();
 
     if (uid.isEmpty) {
       RegisterOrLogin.authStream.add("");
