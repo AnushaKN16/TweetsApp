@@ -35,6 +35,7 @@ dependencies:
   dio: ^5.7.0
   onboarding: ^3.1.0
   flutter_svg: ^2.0.10
+  uuid:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
