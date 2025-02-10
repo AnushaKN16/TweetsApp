@@ -31,7 +31,7 @@ export const getTweetController = async (req: Request, res: Response) => {
 };
 
 export const getAllTweetsController = async (req: Request, res: Response) => {
-
+  console.log("j");
   try {
     const tweets = await getAllTweetsRepo();
     if (tweets) {
@@ -44,7 +44,6 @@ export const getAllTweetsController = async (req: Request, res: Response) => {
     res.status(500).json({ error: error });
   }
 };
-
 
 export const createTweetController = async (req: Request, res: Response) => {
   const tweet: ITweetInterface = req.body;

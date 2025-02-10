@@ -67,6 +67,8 @@ export const updateTweetRepo = async (
 export const getAllTweetsRepo = async (): Promise<any[] | null> => {
   try {
     const allTweets = await TweetModel.find();
+    console.log("repo code");
+    console.log(allTweets.toString());
     if (!allTweets || allTweets.length == 0) {
       return null;
     }
@@ -84,6 +86,7 @@ export const getAllTweetsRepo = async (): Promise<any[] | null> => {
     );
     return tweetWithUserInfo;
   } catch (error) {
+    console.log(error);
     return null;
   }
 };
