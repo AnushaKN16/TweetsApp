@@ -64,25 +64,26 @@ export const updateTweetRepo = async (
   }
 };
 
-export const getAllTweetsRepo = async() :Promise<any[] | null> => {
+export const getAllTweetsRepo = async (): Promise<any[] | null> => {
   try {
     const allTweets = await TweetModel.find();
-    if(!allTweets || allTweets.length == 0){
-      return null
+    if (!allTweets || allTweets.length == 0) {
+      return null;
     }
 
     const tweetWithUserInfo = await Promise.all(
-      allTweets.map(async(tweet: { adminId: any; }) => {
-      const admin = await UserModel.findOne({uid: tweet.adminId})
+      allTweets.map(async (tweet) => {
+        const admin = await UserModel.findOne({ uid: tweet.adminId });
 
-      if(!admin){
-        return{tweet, admin: null}
-      } else {
-        return {tweet, admin:admin}
-      }
-    }))
+        if (!admin) {
+          return { tweet, admin: null };
+        } else {
+          return { tweet, admin: admin };
+        }
+      })
+    );
     return tweetWithUserInfo;
   } catch (error) {
     return null;
   }
-}
+};
