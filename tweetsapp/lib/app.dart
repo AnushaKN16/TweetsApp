@@ -16,8 +16,8 @@ class RegisterOrLogin extends StatefulWidget {
 class _RegisterOrLoginState extends State<RegisterOrLogin> {
   @override
   void initState() {
+    super.initState();
     getUid();
-    // TODO: implement initState
   }
 
   getUid() async {
@@ -35,8 +35,10 @@ class _RegisterOrLoginState extends State<RegisterOrLogin> {
     return StreamBuilder<String>(
       stream: RegisterOrLogin.authStream.stream,
       builder: (context, snapshot) {
-        if (snapshot.data == null || snapshot.data!.isEmpty) {
+        if (snapshot.hasData) {
           return const OnboardingScreen();
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
         } else {
           return const TweetsScreen();
         }

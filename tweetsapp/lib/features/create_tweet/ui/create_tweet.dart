@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tweetsapp/features/create_tweet/bloc/create_tweet_bloc.dart';
 import 'package:tweetsapp/features/create_tweet/bloc/create_tweet_state.dart';
+import 'package:tweetsapp/features/tweet/bloc/tweet_bloc.dart';
+import 'package:tweetsapp/features/tweet/bloc/tweet_event.dart';
 
 class CreateTweet extends StatefulWidget {
-  const CreateTweet({super.key});
+  final TweetsBloc tweetBloc;
+  const CreateTweet({super.key, required this.tweetBloc});
 
   @override
   State<CreateTweet> createState() => _CreateTweetState();
@@ -23,6 +26,7 @@ class _CreateTweetState extends State<CreateTweet> {
           if (state is CreateTweetLoadingState) {
             loader = true;
           } else if (state is CreateTweetSuccessState) {
+            widget.tweetBloc.add(TweetInitialFetchEvent());
             loader = false;
             Navigator.pop(context);
           } else if (state is CreateTweetErrorState) {
